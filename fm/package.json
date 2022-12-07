@@ -1,0 +1,9 @@
+{
+  "name": "fm",
+  "version": "1.0.0",
+  "description": "My file manager",
+  "main": "server.js",
+  "bin": "server.js",
+  "type": "module"
+
+}
