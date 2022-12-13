@@ -1,27 +1,13 @@
-import * as fs from "fs/promises";
+import * as fs from "fs";
 import path from "node:path";
 
-export const rm = async (dir, oldName, newName) => {
-  const oldFile = path.resolve(`${dir}`, `${oldName}`);
-  const newFile = path.resolve(`${dir}`, `${newName}`);
+export const rm = async (dir, Param) => {
+  const file = path.resolve(`${dir}`, `${Param}`);
 
-  let fileWrong = await fs.stat(oldFile).catch((e) => {});
-  let properFilename = await fs.stat(newFile).catch((e) => {});
-
-  if (!fileWrong) {
-    console.log(oldFile);
-    console.log("no source file");
-    return
-  }
-  if (properFilename) {
-    console.log("a file with the same name already exists");
-    return
-  }
-
-  await fs
-    .rename(oldFile, newFile, {flag: 'wx'})
-    .then(() => console.log("Success!"))
-    .catch(() => {
-      console.log("failed to rename");
-    });
+  fs.unlink(file, function (err) {
+    console.log("Success");
+    if (err) {
+      console.log("Operation failed");
+    }
+  });
 };

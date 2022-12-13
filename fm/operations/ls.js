@@ -3,15 +3,17 @@ import * as fs from "fs/promises";
 export const ls = async (dir) => {
   let folderArr = [];
   let fileArr = [];
-  const folder = await fs.stat(dir).catch((e) => {});
+  const folder = await fs.stat(dir).catch((e) => {
+    console.log("Operation failed");
+  });
 
   if (!folder) {
-    throw new Error("Path does not exist");
+    console.log("Invalid input");
   } else {
     for (let elem of await fs.readdir(dir, { withFileTypes: true })) {
       if (elem.isDirectory()) {
         folderArr.push({ name: elem.name, type: "directory" });
-      } else if (elem.isFile(elem)) {
+      } else if (elem.isFile()) {
         fileArr.push({ name: elem.name, type: "file" });
       }
     }
