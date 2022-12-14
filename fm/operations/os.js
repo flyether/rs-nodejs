@@ -1,6 +1,6 @@
 import os from "os";
 
-export const osFunc = async (dir, param) => {
+export const osFunc = async (param) => {
   switch (param.toLowerCase()) {
     case "--eol":
       console.log(JSON.stringify(os.EOL));
@@ -18,6 +18,14 @@ export const osFunc = async (dir, param) => {
 
     case "--homedir":
       console.log(os.homedir());
+      break;
+
+    case "--username":
+      console.log(os.userInfo().username);
+      break;
+
+    case "--architecture":
+      console.log(os.arch());
       break;
 
     default:

@@ -66,21 +66,29 @@ rl.on("line", async (input) => {
       await rm(userHomeDir, parseInput.parameters);
       break;
     case "os":
-      await osFunc(userHomeDir, parseInput.parameters[0]);
+      await osFunc(parseInput.parameters[0]);
       break;
 
-      case "hash":
-        await hash(userHomeDir, parseInput.parameters);
-        break;
-        case "compress":
-          await compress(userHomeDir, parseInput.parameters[0], parseInput.parameters[1]);
-          break;
-          case "decompress":
-            await decompress(userHomeDir, parseInput.parameters[0], parseInput.parameters[1]);
-            break;
-      case ".exit":
-        console.log(`Thank you for using File Manager, ${username}, goodbye!`);
-    rl.close();
+    case "hash":
+      await hash(userHomeDir, parseInput.parameters);
+      break;
+    case "compress":
+      await compress(
+        userHomeDir,
+        parseInput.parameters[0],
+        parseInput.parameters[1]
+      );
+      break;
+    case "decompress":
+      await decompress(
+        userHomeDir,
+        parseInput.parameters[0],
+        parseInput.parameters[1]
+      );
+      break;
+    case ".exit":
+      console.log(`Thank you for using File Manager, ${username}, goodbye!`);
+      rl.close();
       break;
     default:
       console.log("не команда а хуйня, в смысле: Operation failed");
@@ -89,7 +97,7 @@ rl.on("line", async (input) => {
   console.log(`You are currently in ${userHomeDir}`);
 });
 
-rl.on('SIGINT', () => {
+rl.on("SIGINT", () => {
   console.log(`Thank you for using File Manager, ${username}, goodbye!`);
   rl.close();
 });
