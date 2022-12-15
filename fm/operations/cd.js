@@ -6,7 +6,7 @@ export const cd = async (userHomeDirect, param) => {
     console.log("invalid input");
     return
   }
-  const newDir = path.resolve(`${userHomeDirect}`, `${param}`);
+  const newDir = path.resolve(userHomeDirect, param);
   let st = await fs.stat(newDir).catch((err) => {
     console.log("invalid input");
   });

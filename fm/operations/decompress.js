@@ -5,11 +5,11 @@ import zlib from "zlib";
 import { promisify } from "util";
 
 export const decompress = async (dir, fileFromCompressParam, newDirParam) => {
-  const fileFromCompress = path.resolve(`${dir}`, `${fileFromCompressParam}`);
+  const fileFromCompress = path.resolve(dir, fileFromCompressParam);
 
   let fileName = path.basename(fileFromCompress);
   fileName = fileName.replace('.br','');
-  const newDir = path.resolve(`${dir}`, `${newDirParam}`, `${fileName}`);
+  const newDir = path.resolve(dir, newDirParam, fileName);
 
   const readable = fs.createReadStream(fileFromCompress);
   const writable = fs.createWriteStream(newDir);

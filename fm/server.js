@@ -39,19 +39,18 @@ rl.on("line", async (input) => {
     case "cd":
       if (parseInput.parameters == "..") {
         userHomeDir = dirname(userHomeDir);
-        г;
       } else {
-        userHomeDir = await cd(userHomeDir, parseInput.parameters);
+        userHomeDir = await cd(userHomeDir, parseInput.parameters[0]);
       }
       break;
     case "ls":
       await ls(userHomeDir);
       break;
     case "cat":
-      await cat(userHomeDir, parseInput.parameters);
+      await cat(userHomeDir, parseInput.parameters[0]);
       break;
     case "add":
-      await add(userHomeDir, parseInput.parameters);
+      await add(userHomeDir, parseInput.parameters[0]);
       break;
     case "rn":
       await rn(userHomeDir, parseInput.parameters[0], parseInput.parameters[1]);
@@ -63,14 +62,14 @@ rl.on("line", async (input) => {
       await mv(userHomeDir, parseInput.parameters[0], parseInput.parameters[1]);
       break;
     case "rm":
-      await rm(userHomeDir, parseInput.parameters);
+      await rm(userHomeDir, parseInput.parameters[0]);
       break;
     case "os":
       await osFunc(parseInput.parameters[0]);
       break;
 
     case "hash":
-      await hash(userHomeDir, parseInput.parameters);
+      await hash(userHomeDir, parseInput.parameters[0]);
       break;
     case "compress":
       await compress(
@@ -91,7 +90,7 @@ rl.on("line", async (input) => {
       rl.close();
       break;
     default:
-      console.log("не команда а хуйня, в смысле: Operation failed");
+      console.log("Invalid input");
       break;
   }
   console.log(`You are currently in ${userHomeDir}`);

@@ -4,10 +4,10 @@ import { pipeline } from "stream";
 import zlib from "zlib";
 
 export const compress = async (dir, fileToCompressParam, newDirParam) => {
-  const fileToCompress = path.resolve(`${dir}`, `${fileToCompressParam}`);
+  const fileToCompress = path.resolve(dir, fileToCompressParam);
   let fileName = path.basename(fileToCompress);
   fileName = fileName + ".br";
-  const newDir = path.resolve(`${dir}`, `${newDirParam}`, `${fileName}`);
+  const newDir = path.resolve(dir, newDirParam, fileName);
 
   const readable = fs.createReadStream(fileToCompress);
   const writable = fs.createWriteStream(newDir);

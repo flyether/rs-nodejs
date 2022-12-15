@@ -1,16 +1,18 @@
 import process from "process";
 import path from "node:path";
-import { open } from "fs/promises";
+import fs from "fs";
 
 export const cat = async (dir, param) => {
-  const newDir = path.resolve(`${dir}`, `${param}`);
+  const file = path.resolve(dir, param);
 
-  try {
-    const fo = await open(newDir);
-    const stream = fo.createReadStream({ encoding: "utf8" , flag: 'wx'});
+  let readableStream = fs.createReadStream(file, "utf8");
 
-    stream.pipe(process.stdout);
-  } catch {
+  readableStream.on("open", () => {});
+
+  readableStream.on("data", (data) => {
+    console.log(data.toString());
+  });
+  readableStream.on("error", (err) => {
     console.log("Operation failed");
-  }
+  });
 };
